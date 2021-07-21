@@ -1,0 +1,15 @@
+{
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "/static/img/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "name": "臭小猪电影",
+  "short_name": "臭小猪",
+  "start_url": "/",
+  "theme_color": "#000000"
+}

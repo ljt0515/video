@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>videojs播放器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <style type="text/css">
+        html,body{width:100%;height:100%; padding:0; margin:0;}
+        #dplayer{width:100%;height:100%;}
+    </style>
+    <link href="/static/js/dplayer/DPlayer.min.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/dplayer/DPlayer.min.js"></script>
+    <script src="/static/js/dplayer/hls.min.js"></script>
+</head>
+<body marginwidth="0" marginheight="0">
+<div id="dplayer">
+</div>
+
+<script type="text/javascript">
+    var isMobile = navigator.userAgent.match(/iPad|iPhone|Linux|Android|iPod|Mobile|Macintosh/i) != null;
+    var dp = new DPlayer({
+        container: document.getElementById('dplayer'),
+        autoplay: true,
+        loop:false,
+        screenshot:true,
+        hotkey:true,
+        video: {
+            url: parent.MacPlayer.PlayUrl,
+            type: 'customHls',
+            customType: {
+                customHls: function(video, player) {
+                    if (isMobile) {
+                        var html = '<video src="'+video.src+'" controls="controls" autoplay="autoplay" width="100%" height="93%"></video>';
+                        document.getElementById('dplayer').innerHTML = html;
+                    }else {
+                        var hls = new Hls();
+                        hls.loadSource(video.src);
+                        hls.attachMedia(video);
+                    }
+                },
+            },
+        },
+    });
+
+    var seek = parent.MacPlayer.Seek.Get(); //调用已记录的time
+    if(seek > 0) {
+        dp.on('loadeddata', function () {
+            dp.seek(seek);
+            dp.play()
+        });
+    }
+    if (!isMobile) {
+        interval = setInterval(function () {
+            if (parseInt(dp.video.duration) == parseInt(dp.video.currentTime)) {
+                parent.MacPlayer.Seek.Del()
+            }
+            parent.MacPlayer.Seek.Set(dp.video.currentTime)
+        }, 1000);
+    }
+</script>
+</body>
+</html>

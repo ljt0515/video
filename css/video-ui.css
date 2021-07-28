@@ -179,7 +179,7 @@ textarea.form-control{ height: auto; padding: 10px;}
 .video_ui-panel__head .title{ float: left; display: inline-block; margin:0; padding-right: 10px; line-height: 30px;}
 .video_ui-panel__head .title img{ display: inline-block; width: 24px; height: 24px; margin-right: 10px; vertical-align: -5px;}
 .video_ui-panel__head .title, .video_ui-panel__head .title a{ font-size: 24px;}
-.video_ui-panel__head .more{ line-height: 30px;}
+.video_ui-panel__head .more{ line-height: 30px;float: right;}
 .video_ui-panel__head .operate{ position: relative; padding-bottom: 5px;}
 .video_ui-panel__head .operate.open .dropdown-menu{ display: block;}
 .video_ui-panel__head.active{ height: 42px;}

@@ -134,11 +134,11 @@ var YZM = {
   def: function () {
     console.log('播放器开启')
     YZM.stime = 0
-    YZM.headt = yzmck.get('headt')
-    YZM.lastt = yzmck.get('lastt')
+    YZM.headt = yzmck.get('headt'+config.id.split("-")[0])
+    YZM.lastt = yzmck.get('lastt'+config.id.split("-")[0])
     YZM.last_tip = parseInt(YZM.lastt) + 10
-    YZM.frists = yzmck.get('frists')
-    YZM.lasts = yzmck.get('lasts')
+    YZM.frists = yzmck.get('frists'+config.id.split("-")[0])
+    YZM.lasts = yzmck.get('lasts'+config.id.split("-")[0])
     YZM.playtime = Number(YZM.getCookie('time_' + config.id))
     YZM.ctime = YZM.formatTime(YZM.playtime)
     YZM.dp.on('loadedmetadata', function () {
@@ -559,27 +559,17 @@ var YZM = {
     },
   },
   setCookie: function (c_name, value, expireHours) {
-    var exdate = new Date()
-    exdate.setHours(exdate.getHours() + expireHours)
-    document.cookie =
-      c_name +
-      '=' +
-      escape(value) +
-      (expireHours === null ? '' : ';expires=' + exdate.toGMTString())
+    var key = player_data.index;
+    var data = {}
+    data[key]=Math.floor(seek)
+    VideoTheme.LocalStorage.Set(c_name,data,expireHours);
   },
   getCookie: function (c_name) {
-    if (document.cookie.length > 0) {
-      c_start = document.cookie.indexOf(c_name + '=')
-      if (c_start !== -1) {
-        c_start = c_start + c_name.length + 1
-        c_end = document.cookie.indexOf(';', c_start)
-        if (c_end === -1) {
-          c_end = document.cookie.length
-        }
-        return unescape(document.cookie.substring(c_start, c_end))
-      }
+    var cookieTime = VideoTheme.LocalStorage.Get(c_name)[player_data.index]; //调用已记录的time
+    if(!cookieTime || cookieTime == undefined) { //如果没有记录值，则设置时间0开始播放
+      cookieTime = 0;
     }
-    return ''
+    return cookieTime;
   },
   formatTime: function (seconds) {
     return [

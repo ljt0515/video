@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <title></title>
+    <meta name="renderer" content="webkit"> <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="theme-color" content="#de698c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="applicable-device" content="mobile">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/css/yzmplayer.css?20200622">
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/js/yzmplayer.js?20201106"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/js/setting.js?20201123"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/js/flv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/layer/layer.js"></script>
+
+</head>
+
+<body>
+<div id="player"></div>
+<div id="ADplayer"></div>
+<div id="ADtip"></div>
+<!--div class="tj"><script type="text/javascript" src="cnzz.com"></script></div-->
+<script>
+    var up = {
+        "usernum": "", //在线人数
+        "mylink": "/", //播放器路径，用于下一集
+        "diyid": [0, '游客', 1] //自定义弹幕id
+    }
+    var config = {
+        "api": 'https://vip.parwix.com:4433/dmku/', //弹幕接口/dmku/
+        "av": '', //B站弹幕id 45520296
+        "url": parent.MacPlayer.PlayUrl, //视频链接
+        "id": parent.MacPlayer.PlayId + "-" + parent.MacPlayer.PlayIndex, //视频id
+        "index": parent.MacPlayer.PlayIndex,
+        "sid": "", //集数id
+        "pic": "", //视频封面
+        "title": "", //视频标题
+        "next": parent.MacPlayer.next, //下一集链接
+        "user": '', //用户名
+        "group": "" //用户组
+    }
+    YZM.start()
+</script>
+</body>
+</html>

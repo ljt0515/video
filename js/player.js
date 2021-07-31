@@ -10,8 +10,12 @@ var MacPlayer = {
         // VideoTheme.Ajax( '/video/Jiexi.html?url='+player_data.url,'get','json','',function(r){
         //     this.PlayUrl = r.data
         // });
-        this.PlayId = player_data.id
+        this.PlayId =player_data.id
+        this.PlayIndex = player_data.index
         this.PlayUrl = player_data.url
+        if(player_data.index+2<=player_data.length){
+            this.next="/video/play/"+player_data.id+"-"+(player_data.index1+1)+"-"+(player_data.index+2)+".html"
+        }
         MacPlayer.Play();
     },
     Seek: {

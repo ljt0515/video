@@ -10,6 +10,7 @@ var MacPlayer = {
         // VideoTheme.Ajax( '/video/Jiexi.html?url='+player_data.url,'get','json','',function(r){
         //     this.PlayUrl = r.data
         // });
+        this.PlayId = player_data.id
         this.PlayUrl = player_data.url
         MacPlayer.Play();
     },

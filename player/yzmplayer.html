@@ -16,13 +16,12 @@
     <meta name="applicable-device" content="mobile">
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-orientation" content="portrait">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/css/yzmplayer.css?20200622">
-    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/js/yzmplayer.js?20201106"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/js/setting.js?20201123"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/yzmplayer/js/flv.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.1/js/layer/layer.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.2/js/yzmplayer/css/yzmplayer.css?20200622">
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.2/js/yzmplayer/js/yzmplayer.js?20201106"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.2/js/jquery.min.js"></script>
+    <script src="/static/js/yzmplayer/js/setting.js?20201123"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.2/js/yzmplayer/js/flv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljt0515/video@1.0.2/js/layer/layer.js"></script>
 
 </head>
 
@@ -34,7 +33,7 @@
 <script>
     var up = {
         "usernum": "", //在线人数
-        "mylink": "/", //播放器路径，用于下一集
+        "mylink": window.location.origin, //播放器路径，用于下一集
         "diyid": [0, '游客', 1] //自定义弹幕id
     }
     var config = {

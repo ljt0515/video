@@ -22,24 +22,7 @@ var YZM = {
     $('.danmuku-num').text(dm.dancount)
   },
   start: function () {
-    // $.ajax({
-    //   url: '/admin/api.php',
-    //   dataType: 'json',
-    //   success: function (e) {
     YZM.waittime = 1
-    // YZM.ads = {
-    //   state: 'on',
-    //   set: {
-    //     state: '1',
-    //     group: 'null',
-    //     pic: { time: '3', img: '', link: '#' },
-    //     vod: { url: '/ad.mp4', link: '' },
-    //   },
-    //   pause: {
-    //     // pic: 'https://www.helloimg.com/images/2020/11/16/-1d98afefa49b25713.png',
-    //     // link: 'https://8ljr.com/2fc5b2aed',
-    //   },
-    // }
     config.logo = '/static/upload/logo.png'
     up.pbgjz = '草,操,妈,逼,滚,网址,网站,支付宝,企,关注,wx,微信,qq,QQ,1,2,3,4,5,6,7,8,9,0,好卡,com,cn,top,net'
     up.trysee = '3'
@@ -47,28 +30,15 @@ var YZM = {
     config.color = '#ff6429'
     config.group_x = null
     config.dmrule = 'javascript:void(0);'
-    //config.group = YZM.getCookie('group_id');
     danmuon = 'on'
-    YZM.play(config.url)
-    // if (
-    //   config.group < config.group_x &&
-    //   YZM.ads.state == 'on' &&
-    //   config.group != ''
-    // ) {
-    //   // if (YZM.ads.set.state == '1') {
-    //   //   YZM.MYad.vod(YZM.ads.set.vod.url, YZM.ads.set.vod.link)
-    //   // } else if (YZM.ads.set.state == '2') {
-    //     // YZM.MYad.pic(
-    //     //   YZM.ads.set.pic.link,
-    //     //   YZM.ads.set.pic.time,
-    //     //   YZM.ads.set.pic.img
-    //     // )
-    //   // }
-    // } else {
-    //   YZM.play(config.url)
-    // }
-    //   },
-    // })
+    $.ajax({
+      url: '/video/Jiexi.html?url='+parent.MacPlayer.PlayUrl,
+      dataType: 'json',
+      success: function (e) {
+        console.log(e)
+        YZM.play(e.data)
+      }
+    })
   },
   play: function (url) {
     if (!danmuon) {
@@ -148,7 +118,7 @@ var YZM = {
       YZM.endedHandler()
     })
     YZM.dp.on('pause', function () {
-      YZM.MYad.pause.play(YZM.ads.pause.link, YZM.ads.pause.pic)
+      // YZM.MYad.pause.play(YZM.ads.pause.link, YZM.ads.pause.pic)
     })
     YZM.dp.on('play', function () {
       YZM.MYad.pause.out()
@@ -261,8 +231,8 @@ var YZM = {
       l = '.yzmplayer-setting-jlast label'
       f = '#fristtime'
       j = '#jumptime'
-      a(h, 'frists', YZM.frists, 'headt', YZM.headt, f)
-      a(l, 'lasts', YZM.lasts, 'lastt', YZM.lastt, j)
+      a(h, 'frists'+config.id.split("-")[0], YZM.frists, 'headt'+config.id.split("-")[0], YZM.headt, f)
+      a(l, 'lasts'+config.id.split("-")[0], YZM.lasts, 'lastt'+config.id.split("-")[0], YZM.lastt, j)
 
       function er() {
         layer.msg('请输入有效时间哟！')
@@ -558,18 +528,31 @@ var YZM = {
       })
     },
   },
-  setCookie: function (c_name, value, expireHours) {
-    var key = player_data.index;
-    var data = {}
-    data[key]=Math.floor(seek)
-    VideoTheme.LocalStorage.Set(c_name,data,expireHours);
+  setCookie: function (c_name, seek, time) {
+    let data = {
+      time: time ? (Date.now() + (time*24*60*60*1000)) : 0,
+      value: seek
+    }
+    data = JSON.stringify(data);
+    try {
+      localStorage.setItem(c_name,data)
+    } catch (e) {
+      localStorage.clear();
+      localStorage.setItem(c_name,data)
+    }
   },
   getCookie: function (c_name) {
-    var cookieTime = VideoTheme.LocalStorage.Get(c_name)[player_data.index]; //调用已记录的time
-    if(!cookieTime || cookieTime == undefined) { //如果没有记录值，则设置时间0开始播放
-      cookieTime = 0;
+    var data = localStorage.getItem(c_name)
+    data = JSON.parse(data) || {};
+
+    if (data.time === 0) {
+      return data.value;
+    } else if (Date.now() > data.time) {
+      localStorage.removeItem(c_name);
+      return 0;
+    } else {
+      return typeof data.value !== "undefined" ? data.value : 0;
     }
-    return cookieTime;
   },
   formatTime: function (seconds) {
     return [

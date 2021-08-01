@@ -2393,7 +2393,7 @@ f
 .yzmplayer-logo {
   pointer-events: none;
   position: absolute;
-  right: 5%;
+  left: 5%;
   top: 5%;
   width: 100px;
   height: 55px;

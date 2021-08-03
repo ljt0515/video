@@ -14,7 +14,7 @@ var MacPlayer = {
         this.PlayIndex = player_data.index
         this.PlayUrl = player_data.url
         this.next="";
-        if(player_data.index+2<=player_data.length){
+        if(player_data.index+1<=player_data.length){
             this.next="/video/play/"+player_data.id+"-"+(player_data.index1+1)+"-"+(player_data.index+2)+".html"
         }
         MacPlayer.Play();

@@ -1960,7 +1960,7 @@
             '</span>\n    </div>\n</div>\n<div class="yzmplayer-controller-mask"></div>\n<div class="yzmplayer-controller">\n  <div class="controller-box">\n   <div class="yzmplayer-icons yzmplayer-icons-left">\n        <button class="yzmplayer-icon yzmplayer-play-icon">\n            <span class="yzmplayer-icon-content">'),
           (t += l.play),
           (t +=
-            '</span>\n        </button>\n    <button onclick="PAR.video.next();" class="yzmplayer-icon  icon-xj" data-balloon="下一集" data-balloon-pos="up">\n<span class="yzmplayer-icon-content"><svg aria-hidden="true" fill="#fff"><use xlink:href="#icon-play-xj"></use></svg></span></button>\n    <div class="yzmplayer-volume">\n            <button class="yzmplayer-icon yzmplayer-volume-icon">\n                <span class="yzmplayer-icon-content">'),
+            '</span>\n        </button>\n    <button onclick="YZM.video.next();" class="yzmplayer-icon  icon-xj" data-balloon="下一集" data-balloon-pos="up">\n<span class="yzmplayer-icon-content"><svg aria-hidden="true" fill="#fff"><use xlink:href="#icon-play-xj"></use></svg></span></button>\n    <div class="yzmplayer-volume">\n            <button class="yzmplayer-icon yzmplayer-volume-icon">\n                <span class="yzmplayer-icon-content">'),
           (t += l.volumeDown),
           (t +=
             '</span>\n            </button>\n            <div class="yzmplayer-volume-bar-wrap" data-balloon-pos="up">\n                <div class="yzmplayer-volume-bar">\n                    <div class="yzmplayer-volume-bar-inner" style="background: '),

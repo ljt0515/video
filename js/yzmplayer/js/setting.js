@@ -32,7 +32,7 @@ var YZM = {
     config.dmrule = 'javascript:void(0);'
     danmuon = 'on'
     $.ajax({
-      url: '/video/Jiexi.html?url='+parent.MacPlayer.PlayUrl,
+      url: '/video/Parse.html?url='+parent.MacPlayer.PlayUrl,
       dataType: 'json',
       success: function (e) {
         console.log(e)

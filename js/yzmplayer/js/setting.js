@@ -21,6 +21,31 @@ var YZM = {
     $('.yzmplayer-watching-number').text(dm.watchnum)
     $('.danmuku-num').text(dm.dancount)
   },
+  compare: function(i) {
+    var o = function(n, t) {
+      return n - t;
+    };
+    return function(n, t) {
+      var e = n[i], r = t[i];
+      return o(e, r);
+    };
+  },
+  secret: function(n, t, e) {
+    var i = "LSEHx";
+    t = CryptoJS.MD5(t).toString();
+    var o = CryptoJS.enc.Utf8.parse(t.substring(0, 16)), u = CryptoJS.enc.Utf8.parse(t.substring(16));
+    if (e) {
+       return CryptoJS.AES.decrypt(n, u, {
+        iv: o,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString(CryptoJS.enc.Utf8);
+    }
+    return CryptoJS.AES.encrypt(n, u, {
+      iv: o,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7
+    }).toString();
+  },
   start: function () {
     YZM.waittime = 1
     config.logo = '/static/upload/logo.png'
@@ -31,12 +56,30 @@ var YZM = {
     config.group_x = null
     config.dmrule = 'javascript:void(0);'
     danmuon = 'on'
+    // YZM.load();
     $.ajax({
       url: '/video/Parse.html?url='+parent.MacPlayer.PlayUrl,
       dataType: 'json',
       success: function (e) {
-        console.log(e)
-        YZM.play(e.data)
+        if(e.data.pu===""){
+          YZM.play(e.data.url)
+        }else{
+          var _pr = e.data.pr.replace('vod_','');;
+          var _pu = e.data.pu.replace('vod_','');;
+          var _puArr  = [];
+          var _newArr = [];
+          var _code   = '';
+          for(var i=0;i< _pu.length; i++){
+            _puArr.push({ 'id':_pu[i], 'text': _pr[i] });
+          }
+          //对密钥重新进行排序
+          _newArr = _puArr.sort(YZM.compare("id"));
+          for(var i=0;i< _newArr.length; i++){
+            _code+=_newArr[i]['text'];
+          }
+          YZM.play(YZM.secret(e.data.url,_code, true))
+        }
+
       }
     })
   },

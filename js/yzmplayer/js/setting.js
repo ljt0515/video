@@ -62,7 +62,16 @@ var YZM = {
       dataType: 'json',
       success: function (e) {
         if(e.data.pu===""){
-          YZM.play(e.data.url)
+          if(e.data.url.indexOf("http")!=-1){
+            YZM.play(e.data.url)
+          }else{
+            var url = CryptoJS.AES.decrypt(e.data.url, CryptoJS.enc.Utf8.parse(CryptoJS.MD5("rXjWvXl6")), {
+              iv:CryptoJS.enc.Utf8.parse('NXbHoWJbpsEOin8b'),
+              mode:CryptoJS.mode.CBC,
+              padding: CryptoJS.pad.ZeroPadding
+            }).toString(CryptoJS.enc.Utf8);
+            YZM.play(url)
+          }
         }else{
           var _pr = e.data.pr.replace('vod_','');;
           var _pu = e.data.pu.replace('vod_','');;

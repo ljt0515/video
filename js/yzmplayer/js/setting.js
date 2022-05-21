@@ -60,7 +60,15 @@ var YZM = {
     $.ajax({
       url: '/video/Parse.html?url='+parent.MacPlayer.PlayUrl,
       dataType: 'json',
+      timeout:3000,
       success: function (e) {
+        if(e.data.url =="") {
+          $("body").html("<iframe border=\"0\" src=\"https://dmjx.m3u8.tv/?url=" + parent.MacPlayer.PlayUrl + "\" width=\"100%\" height=\"100%\"\n" +
+              "                marginwidth=\"0\" framespacing=\"0\" marginheight=\"0\" frameborder=\"0\" scrolling=\"no\"\n" +
+              "                   vspale=\"0\" noresize=\"\">\n </iframe>")
+          return
+        }
+
         if(e.data.pu===""){
           if(e.data.url.indexOf("http")!=-1){
             YZM.play(e.data.url)
@@ -89,6 +97,11 @@ var YZM = {
           YZM.play(YZM.secret(e.data.url,_code, true))
         }
 
+      },
+      error:function (){
+        $("body").html("<iframe border=\"0\" src=\"https://dmjx.m3u8.tv/?url=" + parent.MacPlayer.PlayUrl + "\" width=\"100%\" height=\"100%\"\n" +
+            "                marginwidth=\"0\" framespacing=\"0\" marginheight=\"0\" frameborder=\"0\" scrolling=\"no\"\n" +
+            "                   vspale=\"0\" noresize=\"\">\n </iframe>")
       }
     })
   },
@@ -177,6 +190,9 @@ var YZM = {
     })
     YZM.dp.on('timeupdate', function (e) {
       YZM.timeupdateHandler()
+    })
+    YZM.dp.on('error', function (e) {
+      console.log("111")
     })
     YZM.jump.def()
   },
